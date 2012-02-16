@@ -1,0 +1,15 @@
+<table class="profile" summary="Profile information">
+   <tr>
+	<td class="main">
+		<% @users.each do |user| %>
+			<h1>
+				<%= gravatar_for user %>
+				<%= user.name %>
+			</h1>
+		<% end %>
+	</td>
+	<td class="sidebar round">
+	</td>
+   </tr>
+</table>
+
