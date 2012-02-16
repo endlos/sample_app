@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  #render views
+  render_views
   
   describe "GET show" do
 	  
@@ -10,7 +10,7 @@ describe UsersController do
 	  end
 	  
 	   it "should be successful" do
-		   get :show, :id => @user.id  # or @user  (rails will know it's "@user.id")
+		   get :show, :id => @user  # or @user  (rails will know it's "@user.id")
 		   response.should be_success
 	   end
 	   
@@ -19,6 +19,26 @@ describe UsersController do
 		   assigns(:user).should == @user
 	   end
 	   
+	   it "should have the right title" do
+		   get :show, :id => @user
+		   response.should have_selector('title', :content => @user.name)
+	   end
+	   
+	   it "should have the user's name" do
+		   get :show, :id  => @user
+		   response.should have_selector('h1', :content => @user.name)
+	   end	 
+
+	   it "should have a profile image" do
+		   get :show, :id => @user
+		   response.should have_selector('h1>img', :class => "gravatar")
+	   end   
+	   
+	   it "should have the right URL" do
+		   get :show, :id => @user
+		   response.should have_selector('td>a', :content => user_path(@user),
+									 :href      => user_path(@user))
+	   end
   end
 
   describe "GET 'new'" do
@@ -29,6 +49,7 @@ describe UsersController do
     
     it "should have the right title" do
 	    get 'new'
+    	    #response.should have_selector('title', :content => "Sign up")   <- ??
 	    response.should have_selector(:title, :content => "Sign up")
     end
 
