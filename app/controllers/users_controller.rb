@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  
+
+  def index
+	@users = User.all
+  end  
   def show
 	@user = User.find(params[:id])
 	@title = @user.name
@@ -14,7 +17,11 @@ class UsersController < ApplicationController
 	#raise params[:user].inspect
 	@user = User.new(params[:user])
 	if @user.save
-		# Handle a successful save
+		##### En 2 lineas:
+		#flash[:success] = "Welcome to the Sample App!"
+		#redirect_to user_path(@user)  # Puede ser "@user" en vez de "user_path(@user)" 
+		##### En 1 linea: 
+		redirect_to user_path(@user), :flash => { :success => "Welcome to the Sample App!" }
 	else
 		@title = "Sign up"
 		render 'new'
