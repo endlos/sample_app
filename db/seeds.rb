@@ -12,4 +12,5 @@ User.create!(:name => "Peter", :email => "peter@example.com",
               :password => "foobar", :password_confirmation => "foobar")
 User.create!(:name => "Beta", :email => "beta@example.com",
               :password => "foobar", :password_confirmation => "foobar")
-	      
+User.create!(:name => "Tutorial", :email => "example@railstutorial.org",
+              :password => "foobar", :password_confirmation => "foobar")
